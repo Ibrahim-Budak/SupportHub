@@ -42,7 +42,7 @@ class Ticket extends Model
         return $this->hasMany(TicketMessage::class);
     }
 
-    // SLA kontrolü için yardımcı fonksiyon
+    
     public function isSlaBreached(): bool
     {
         if ($this->priority !== 'high' || $this->first_response_at) {
