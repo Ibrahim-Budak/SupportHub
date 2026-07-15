@@ -35,4 +35,16 @@
             </form>
         @endcan
     </div>
+    @push('scripts')
+<script type="module">
+    window.Echo.private('ticket.{{ $ticket->id }}')
+        .listen('.message.sent', (e) => {
+            const container = document.getElementById('messages');
+            const div = document.createElement('div');
+            div.className = 'bg-white p-3 rounded shadow';
+            div.innerHTML = `<p class="text-sm text-gray-500">${e.user_name} — ${e.created_at}</p><p>${e.message}</p>`;
+            container.appendChild(div);
+        });
+</script>
+@endpush
 </x-app-layout>

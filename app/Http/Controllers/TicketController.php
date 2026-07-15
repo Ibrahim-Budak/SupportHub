@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ticket;
 use App\Models\TicketMessage;
 use Illuminate\Http\Request;
+use App\Events\MessageSent;
 
 class TicketController extends Controller
 {
@@ -93,7 +94,8 @@ class TicketController extends Controller
             $ticket->update(['first_response_at' => now()]);
         }
 
-        
+        broadcast(new MessageSent($message))->toOthers();
+
 
         return back();
     }
