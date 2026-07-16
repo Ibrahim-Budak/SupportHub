@@ -53,7 +53,9 @@ class TicketController extends Controller
 
         $ticket->load('messages.user', 'customer', 'agent');
 
-        return view('tickets.show', compact('ticket'));
+        $agents = \App\Models\User::whereIn('role', ['agent', 'admin'])->get();
+
+        return view('tickets.show', compact('ticket', 'agents'));
     }
 
     public function update(Request $request, Ticket $ticket)
@@ -73,6 +75,19 @@ class TicketController extends Controller
         $ticket->update($validated);
 
         return back()->with('success', 'Talep güncellendi.');
+    }
+
+    public function assign(Request $request, Ticket $ticket)
+    {
+        $this->authorize('assign', $ticket);
+
+        $validated = $request->validate([
+            'agent_id' => 'nullable|exists:users,id',
+        ]);
+
+        $ticket->update(['agent_id' => $validated['agent_id']]);
+
+        return back()->with('success', 'Temsilci atandi.');
     }
 
     public function reply(Request $request, Ticket $ticket)
