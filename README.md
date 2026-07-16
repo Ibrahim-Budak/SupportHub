@@ -80,10 +80,6 @@ SLA kontrolünü zamanlamayı beklemeden manuel çalıştırmak için:
 php artisan tickets:check-sla
 ```
 
-## 📸 Ekran Görüntüleri
-
-*(Buraya proje ekran görüntülerini ekleyebilirsin)*
-
 ## 📄 Lisans
 
 Bu proje eğitim/portföy amaçlı geliştirilmiştir.
