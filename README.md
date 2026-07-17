@@ -9,6 +9,8 @@ SupportHub, müşterilerin destek talebi oluşturabildiği, destek temsilcilerin
 - **Gerçek Zamanlı Mesajlaşma:** Laravel Reverb ile WebSocket üzerinden, sayfa yenilenmeden mesajlaşma.
 - **Yetkilendirme (Policy):** Müşteriler yalnızca kendi taleplerini görebilir; temsilciler ve adminler tüm talepleri yönetebilir.
 - **SLA Takibi:** Yüksek öncelikli bir talebe 2 saat içinde yanıt verilmezse, zamanlanmış bir komut talebi otomatik olarak "gecikmiş" işaretler.
+- **Dashboard Özeti:** Giriş yapan kullanıcıya açık/işleniyor/yanıtlandı/kapatılmış/gecikmiş talep sayılarını gösteren özet ekran.
+- **Temsilci Atama:** Agent/admin rolündeki kullanıcılar taleplere temsilci atayabilir.
 
 ## 🛠️ Kullanılan Teknolojiler
 
