@@ -20,7 +20,25 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $user = auth()->user();
+
+    if ($user->role === 'agent' || $user->role === 'admin') {
+        $tickets = \App\Models\Ticket::with('customer')->latest()->get();
+    } else {
+        $tickets = \App\Models\Ticket::where('customer_id', $user->id)->latest()->get();
+    }
+
+    $stats = [
+        'open' => $tickets->where('status', 'open')->count(),
+        'in_progress' => $tickets->where('status', 'in_progress')->count(),
+        'answered' => $tickets->where('status', 'answered')->count(),
+        'closed' => $tickets->where('status', 'closed')->count(),
+        'sla_breached' => $tickets->where('sla_breached', true)->count(),
+    ];
+
+    $recentTickets = $tickets->take(5);
+
+    return view('dashboard', compact('stats', 'recentTickets'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
